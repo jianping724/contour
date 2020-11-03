@@ -99,7 +99,7 @@ jobs:
            SUFFIX=$(grep '### ' Changelog.md | head -n1 | awk '{print $3}' | tr -d '()')
            if [ $REPOSITORY = "master" ]; then IS_PRE='false'; else IS_PRE='true'; fi
            if [ $REPOSITORY = "master" ]; then SUFFIX=''     ; else SUFFIX='prerelease'; fi
-           RELEASEBODY=$(awk -v RS='### ' '/^'$VERSION'/ {print $0}' Changelog.md | tail -n+3)
+           RELEASEBODY=$(awk -v RS='^### ' '/^'$VERSION'/ {print $0}' Changelog.md | tail -n+3)
            RELEASEBODY="${RELEASEBODY//'%'/'%25'}"
            RELEASEBODY="${RELEASEBODY//$'\n'/'%0A'}"
            RELEASEBODY="${RELEASEBODY//$'\r'/'%0D'}"
